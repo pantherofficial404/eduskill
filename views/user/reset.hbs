@@ -1,0 +1,74 @@
+    <style>
+    
+    </style>
+    <div class="row">
+        <div class="col-md-3 col-lg-3 col-xs-3"></div>
+        <div class="col-md-6 col-lg-6 col-xs-6">
+            <form action="/reset/{{token}}" autocomplete="off" method="post">
+            <div class="row">
+                <div class="col-md-8 col-lg-8 col-xs-8">
+                        {{#if messages}}
+                        <p>{{messages}}</p>
+                        {{/if}}
+                    <p class="heading">
+                        Enter New Password
+                    </p>
+                    <div class="row">
+                            <div class="col-md-11 col-lg-11 col-xs-11">
+                                <br>    
+                                <div class="box">
+                                                <input type="password" name="password" required id="password">
+                                                <label for="password">Password</label>
+                                    </div>
+                            </div>
+                            <div class="col-md-1 col-lg-1 col-xs-1">
+                                <br>
+                                    <div class="box">
+                                        <img src="/images/hidden.png" alt="" id="show" onclick="change()">
+                                    </div>
+                                </div>
+                    </div><br>
+                                <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-xs-12">
+                                            <div class="final">
+                                                <a href="/signup" class="link">Login To Your Account</a>
+                                                <button class="btn" type="submit"><i class="fa fa-key" aria-hidden="true"></i>
+ Change Password</button>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-xs-12">
+                                            <div class="google">
+                                                    <br>
+                                                    <p>OR</p><br>
+                                                    <a href="/google" class="btn btn-primary pull-left"><i class="fa fa-google-plus" aria-hidden="true"></i> Login With Google</a>
+                                            </div>
+                                    </div>
+                                </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-xs-4">
+                    <div class="sideImg">
+                            <img src="/images/secure.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <script>
+    function change(){
+        var img = document.getElementById('show')
+        var password = document.getElementById('password')
+        if(password.type==='password'){
+            img.src="/images/show.jpg"
+            password.type="text"
+            console.log('show')
+        }else{
+            img.src="/images/hidden.png"
+            password.type="password"
+            console.log('hidden')
+        }
+    }
+    </script>

@@ -1,0 +1,20 @@
+<h1 style="margin-top:10%;">File Upload</h1>
+{{#if message}}
+<p>{{message}}</p>
+{{/if}}
+<form action="/web/image" method="post" enctype="multipart/form-data">
+    <div class="file-field input-field">
+        <div class="btn">
+            <span>File</span>
+            <input type="file" name="image">
+        </div>
+        <div class="file-path-wrapper">
+            <input type="text">
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </div> 
+</form>
+
+{{#if img}}
+<img src="/upload/{{img}}" alt="" class="responsive-img">
+{{/if}}

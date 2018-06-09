@@ -1,0 +1,223 @@
+<style>
+#wrapper input[type="text"]{
+  width:30%;
+  outline: none;
+  border:none;
+  margin : 0px 10px 0px 0px;
+  border-bottom: 1px solid black;
+  font-size: 18px;
+}
+#data{
+  width:30%;
+  margin:0px 8px 8px 0px;
+  outline: none;
+  font-size: 18px;
+  text-align: center;
+  border:none;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+#wrapper{
+  margin: auto;
+}
+.button_course{
+  margin: auto;
+  margin-top: 20px;
+  margin-left:36%;
+}
+label{
+  color:black;
+  font-size: 16px;
+  margin:10px;
+}
+a:hover{
+  text-decoration: none;
+}
+.panel-default{
+  position: relative;
+}
+.pull-right{
+  position: absolute;
+  top:2%;
+  left:95%;
+  font-size:25px;
+  align-items: center;
+  transition: 0.3s;
+}
+.pull-right:hover{
+  color:red;
+  font-size:36px;
+}
+</style>
+<div class="container" style="margin-top:4%;">
+  <h2>Hello Admin</h2>
+  <ul class="nav nav-pills">
+    <li class="active"><a data-toggle="pill" href="#home">Home</a></li>
+    <li><a data-toggle="pill" href="#menu1">Add New Classes</a></li>
+    <li><a href="#menu2" data-toggle="pill">View Classes</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h2>HOME</h2>
+      <p>Hello Admin This is Your Home Page</p>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <div class="container">
+    <div class="row">
+      <form class="" action="/web/admin/" method="post" enctype="multipart/form-data">
+          <h2 align='Center' style="margin:25px;">Courses</h2>
+        <div class="row">
+          <div class="col-lg-6">
+            <label for="institute_name">Institute Name:</label>
+            <input type="text" class="form-control" name="institute_name">
+            </select>
+          </div>
+            <div class="col-lg-6">
+              <label for="course">Select Course (select one):</label>
+              <select class="form-control" id="courses_list" name="type">
+                <option name="type">Computer Classes</option>
+                <option name="type">Academic Classes</option>
+              </select>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <label for="institute_address">Institute Address:</label>
+            <input type="text" class="form-control" name="institute_address">
+          </div>
+            <div class="col-lg-6">
+              <label for="institute_phone">Institute Phone:</label>
+              <input type="text" class="form-control" name="institute_phone">
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <label for="institute_email">Institute Email:</label>
+            <input type="email" class="form-control" name="institute_email">
+          </div>
+          <div class="col-lg-6">
+            <label for="institute_email">Institute Logo:</label>
+            <input type="file" name="image" class="form-control">
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+                <label for="institute_description">Institute Description :</label>
+                <textarea type="text" class="form-control" rows="7" name="institute_description"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <h2 class="course_heading">Courses :- </h2>
+              <input type="text" name="" value="Courses" readonly id="data">
+              <input type="text" name="" value="Fees" readonly id="data">
+              <input type="text" name="" value="Subject Timing" readonly id="data">
+              <input type="hidden" name="numberOfCourses" value="Subject Timing" readonly id="numberOfCourses">
+            <div id="wrapper">
+            </div>
+            <div class="button_course">
+            <button type="button" name="button" onclick="add()" class="btn btn-primary">+Add Course</button>
+            <button type="button" name="button" onclick="if(wrapper.lastChild==null){void(0);}wrapper.removeChild(wrapper.lastChild)" class="btn btn-danger">-Remove Courses</button>
+            </div>
+            <br>
+            <center>
+            <button type="submit" name="button" class="btn btn-primary btn-lg" onclick="total()">Submit</button>
+          </center>
+            </div>
+          </div>
+        </div>
+      </form>
+      </div>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      {{#each course}}
+      <a href="/course/{{this.id}}">
+    <div class="panel panel-default" style="margin-top:2%;">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <p>{{this.instituteName}}</p>
+          <a href="/web/delete/{{this.id}}" class="pull-right"><i class="fa fa-trash"  aria-hidden="true"></i></a>
+        </h4>
+      </div>
+        <div class="panel-body">
+          <p class="panel-body_p">Address :- {{this.address}}<br>Contact :- {{this.contact}}</p>
+        </div>
+    </div>
+    </a>
+      {{/each}}
+    </div>
+  </div>
+
+</div>
+{{#if image}}
+<script>
+  alert('{{image}}')
+</script>
+{{/if}}
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude +
+    "<br>Longitude: " + position.coords.longitude;
+}
+</script>
+<script>
+      var i = 0
+      var k = i+3
+      var number = 1
+      var wrapper = document.getElementById('wrapper')
+      wrapper.removeChild(wrapper.lastChild)
+      function add() {
+        var div_id = 'course'+number
+        var div = document.createElement('div')
+        div.setAttribute('id',div_id)
+        wrapper.appendChild(div)
+        for(i=i;i<k;i++){
+          var input = document.createElement('input')
+          var br = document.createElement('br')
+          var name;
+          if(i==k-3){
+            name = 'subject';
+          }
+          if(i==k-2){
+            name = 'fees'
+          }
+          if(i==k-1){
+            name = 'time'
+          }
+          input.setAttribute('id',name+number)
+          input.setAttribute('type','text')
+          input.setAttribute('value','')
+          input.setAttribute('name',name+number)
+          div.appendChild(input)
+        }
+        i = i;
+        k = k+3
+        number++;
+        div.appendChild(br)
+    }
+    function total(){
+      var numberOfCourses = document.getElementById('numberOfCourses')
+      numberOfCourses.value = document.getElementById("wrapper").childElementCount
+    }
+      </script>
+{{#if message}}
+<script>
+  alert('{{message}}')
+</script>
+{{/if}}
+{{#if message1}}
+<script>
+  alert('{{message1}}')
+</script>
+{{/if}}

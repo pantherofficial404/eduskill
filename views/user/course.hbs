@@ -1,0 +1,176 @@
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-lg-4">
+      <center>
+      <img src="{{course.logo}}" alt="" class="logo img-responsive">
+    </center>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-lg-8 head">
+      <h3>{{course.instituteName}}</h3>
+      <p>{{course.address}}</p>
+      <p>Phone:- {{course.contact}}</p>
+      <div class="share"> 
+          <a href="mailto:?Subject=Amazing Institute&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20{{url}}">
+        <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" /></a>
+        <a href="http://www.facebook.com/sharer.php?u={{url}}" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+    </a><a href="https://plus.google.com/share?url={{url}}" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
+    </a><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{url}}" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
+    </a><a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());">
+        <img src="https://simplesharebuttons.com/images/somacro/pinterest.png" alt="Pinterest" />
+    </a>
+     <a href="https://twitter.com/share?url={{url}}&amp;text=Simple%20Share%20Buttons&amp;hashtags=simplesharebuttons" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+    </a>
+      </div>
+    </div>
+  </div>
+  <ul class="nav nav-tabs" style="margin-top:5%;">
+    <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-home" aria-hidden="true"></i>Home</a></li>
+    <li><a data-toggle="tab" href="#menu1"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Available Courses</a></li>
+    <li><a data-toggle="tab" href="#menu2"><i class="fa fa-comments" aria-hidden="true"></i>Reviews</a></li>
+    <li><a data-toggle="tab" href="#menu3"><i><i class="fa fa-map-marker" aria-hidden="true"></i>
+</i>View Map</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <div class="description" style="margin:3%">
+        <h2>About Institute :- </h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat ex aliquid culpa placeat amet voluptas error, repudiandae praesentium reprehenderit vero eum minima repellendus harum molestias odio non totam quo officiis nulla magnam sunt! Sapiente odio dolorum facilis vero est, tempore mollitia sunt, ducimus voluptatum earum quos. Id quo fugit itaque vitae velit quis dolore illum error at placeat sequi facere quod ex, praesentium consectetur dignissimos corrupti omnis odio ipsum numquam laudantium amet. Eum sed possimus perferendis? Esse temporibus aut nihil laborum nesciunt maxime quia voluptatem aperiam impedit. Blanditiis iusto esse doloribus dicta eligendi exercitationem placeat! Beatae sint molestiae illo ea exercitationem eveniet dignissimos, ullam voluptates est odio ad, repudiandae accusamus iste, facere sequi? Provident dolorum at similique, ducimus, delectus, minus veniam nulla nisi vero illum eum neque expedita libero sint quisquam! Facilis voluptates ipsa enim saepe temporibus praesentium dicta, vero numquam tempore quas soluta excepturi adipisci iure cupiditate molestias accusantium iusto harum! Facilis error optio illum eum vero, explicabo, ullam magni omnis eveniet quia, est commodi. Eos, corrupti a. Ducimus delectus maiores, alias blanditiis sed aspernatur nobis quos perferendis earum odio consectetur beatae saepe commodi tenetur modi cupiditate voluptatum ipsa a sit mollitia facere atque at neque harum! Non, autem.
+        </p>
+        <p>{{course.instituteDescription}}</p>
+      </div>
+     <section id="course_contact">
+    <div class="row">
+      <div class="row course_contact">
+      <div class="col-xs-12 col-sm-12 col-lg-12">
+        <p id="contact">Contacts</p><br>
+        <p class="contact_details">Email :- {{course.email}}</p>
+        <p class="contact_details">Phone :- {{course.contact}}</p>
+      </div>
+    </div>
+    </div>
+  </section>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <div class="courses">
+    <h3>Available Classes :- </h3>
+    {{#each list}}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <p>{{this.subject}}</p>
+        </h4>
+      </div>
+        <div class="panel-body">
+          <p class="panel-body_p">Fees :- {{this.fee}}<br>Time :- {{this.time}}</p>
+        </div>
+    </div>
+    {{/each}}
+  </div>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+     <div class="comment">
+       <form action="/comment/{{course.id}}" method="post" autocomplete="off">
+      <input type="text" id="comment" name="comment" required><span><button class="btn btn-primary" type="submit"><i class="fa fa-envelope" aria-hidden="true"></i> Comment</button></span>
+       </form>
+
+      {{#if comment}}
+       <div class="comment-box">
+         {{#each comment}}
+         <div class="panel panel-default" style="margin-top:2%;">
+        <div class="panel-heading">
+        <h4 class="panel-title">
+          <p><i class="fa fa-user" aria-hidden="true"></i> {{this.user}}</p>
+        </h4>
+        </div>
+        <div class="panel-body">
+          <p class="panel-body_p">{{this.comment}}<span class="pull-right"><i class="fa fa-clock-o" aria-hidden="true"></i> {{this.time}}</span></p>
+        </div>
+    </div>
+         {{/each}}
+       {{else}}
+       <div class="panel panel-default" style="margin-top:2%;">
+        <div class="panel-heading">
+        <h4 class="panel-title">
+          <p>No Reviews Available</p>
+        </h4>
+        </div>
+      {{/if}}
+     </div>
+    </div>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <section id="address" style="margin:5%;">
+    <div class="row">
+      <div class="col-xs-12 col-md-5 col-lg-5">
+        <div class="panel">
+          <div id="panel"></div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-7 col-lg-7">
+        <div class="map">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+    </div>
+</div>
+</div>
+<script>
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        alert('Geolocation is not supported by this browser.');
+    }
+}
+function showPosition(position) {
+}
+</script>
+<script>
+function initMap() {
+  navigator.permissions && navigator.permissions.query({name: 'geolocation'}).then(function(PermissionStatus) {
+    if(PermissionStatus.state != 'granted'){
+         alert('Please Enable Your Location')
+    }
+})
+  
+  directionsService = new google.maps.DirectionsService;
+  directionsDisplay = new google.maps.DirectionsRenderer;
+  map = new google.maps.Map(
+  document.getElementById('map'), {zoom:15, center:{lat:23.000,lng:73.000 } });
+  directionsDisplay.setMap(map);
+  directionsDisplay.setPanel(document.getElementById('panel'),{preserveViewport: true
+});
+   function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+     navigator.geolocation.getCurrentPosition(function(position) {
+       var location = new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
+  directionsService.route({
+          origin:location,
+          destination: '{{course.address}}',
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Sorry... We Could Not Found Any Location ' + status);
+          }
+        });
+});
+
+   }
+    calculateAndDisplayRoute(directionsService, directionsDisplay);
+}
+</script>
+
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCc7Z9qrjj7BvLFdH4udf6HYIHJ488B28M&callback=initMap"async defer></script>
+{{#if message}}
+<script>
+  alert('{{message}}');
+</script>
+{{/if}}
+

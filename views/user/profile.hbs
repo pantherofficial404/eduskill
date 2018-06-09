@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 col-md-offset-2 col-lg-offset-2 col-xl-offset-2">
+            <div class="profile">
+                {{#if error}}
+                <p class="center">{{error}}</p>
+                {{/if}}
+                <h3 class="center">Profile</h3>
+                <form action="/profile" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                        <div class="box1">
+                        <div>
+                            <input type="text" name="firstname" value="{{profile.firstname}}" required>
+                            <label for="firstname">Firstname</label>
+                        </div>
+                        <div>
+                            <input type="text" name="lasttname" required value="{{profile.lastname}}">
+                            <label for="lastname">Lastname</label>
+                        </div>
+                        <div>
+                            <input type="text" name="email" value="{{profile.email}}" required >
+                            <label for="email">Email</label>
+                        </div>
+                        <div>
+                            <input type="password" name="currentPassword" required>
+                            <label for="currentPassword">Password</label>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary pull-right">Update Info</button>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                        <div class="profileImage">
+                            <img src="{{profile.profile}}" alt="" class="responsive-img">
+                        </div>
+                        <input type="file" name="image">
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#if message}}
+<script>
+    alert('{{message}}');
+</script>
+{{/if}}

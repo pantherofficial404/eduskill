@@ -1,0 +1,633 @@
+.navbar-default{
+  background-color: #fff;
+  border:0;
+  font-family: Poppins;
+}
+
+.navbar-brand{
+  font-size:20px !important;
+  color:black !important;
+  font-weight: bold;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: Poppins !important;
+}
+p{
+  font-family:Roboto !important;
+}
+body{
+  overflow-x: hidden;
+}
+
+#showcase img{
+  width:90%;
+  margin-left:70px;
+}
+
+#showcase h1{
+  font-size:50px;
+  line-height: 1.5em;
+}
+
+#showcase p{
+  line-height:2em;
+}
+#showcase .showcase-right{
+  margin-top:90px;
+}
+
+#block{
+  margin-top:50px;
+}
+
+#block .comfort{
+  height:500px;
+  background-image: url('/images/child.jpeg');
+  border-radius:50px;
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+
+#block h2{
+  color:white;
+  position: relative;
+  line-height:1.9em;
+  text-align:center;
+}
+
+#block .time{
+  height:500px;
+  background-image: url('/images/child.jpeg');
+  border-radius:50px;
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+
+#block .experts{
+  height:500px;
+  background-image: url('/images/child.jpeg');
+  border-radius:50px;
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+
+#p_white{
+  color:white;
+  position: absolute;
+  top:25%;
+  text-align: center;
+  line-height: 2em;
+  font-weight: bold;
+  font-size: 18px;
+  padding:10%;
+}
+
+#block .btn-info{
+  position: absolute;
+  top:60%;
+  left:35%;
+}
+
+.center{
+  text-align:center;
+  padding:20px;
+}
+
+.para_height{
+  line-height: 1.9em;
+  font-size: 20px;
+  color:gray;
+}
+
+.student_heading{
+  margin:10px;
+}
+
+.opinions{
+  margin-top:100px;
+}
+
+.opinions .col-md-3{
+  height: auto;
+  background-color:white !important;
+}
+
+.op_p{
+  color:black;
+  font-size: 36px;
+}
+
+.op1,.op2,.op3{
+  margin:20px;
+  padding:20px;
+}
+.opinions img{
+  position: relative !important;
+  top:-20% !important;
+  left:-15% !important;
+  z-index : 1;
+  transition: transform .4s;
+}
+
+.opinions img:hover{
+  transform: scale(1.2);
+}
+
+.opinions .col-md-3:hover{
+  background-color:#e2e2e2 !important;
+  cursor:pointer;
+}
+
+#courses img{
+  transition: transform .4s;
+  width:100%;
+  max-width: 100%;
+  padding-top: 3%;
+}
+
+
+#courses img:hover{
+  transform: scale(0.9);
+}
+
+.Python_Course, .Web_Development, .PHP_Course{
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.p_heading{
+  margin-top: 10%;
+  font-size: 26px;
+  font-family: Roboto;
+}
+
+.p_description{
+  margin-top: 2%;
+  line-height: 1.9em;
+  font-size: 15px;
+}
+
+#courses .btn{
+  padding:10px;
+  margin:5%;
+}
+
+
+footer{
+  background-color: #dbd6d6;
+}
+
+.arrow{
+  max-width:8%;
+  max-height: 10%;
+  animation-delay: 4s;
+  animation-iteration-count: infinite;
+  animation-duration: 6s;
+}
+
+#showcase, #Opinions, #courses, #block{
+  padding:30px;
+}
+
+.footer{
+  position:relative;
+  width:100%;
+  height:180px;
+}
+
+.footer img{
+  position: relative;
+  top:100px;
+  left:90%;
+  max-height:30%;
+}
+
+.details{
+  position: relative;
+  padding:10%;
+  width:100%;
+  background-color: white;
+  background: transparent;
+}
+
+.details img{
+  position: absolute;
+  top:0%;
+  width:25%;
+  height:22%;
+  left:38%;
+}
+
+
+.user_background{
+  background:url('/images/user_background.jpg');
+  height:650px;
+  background-size:cover;
+  background-position:center;
+  background-attachment: fixed;
+}
+
+/* All Forms CSS Starts Here */
+
+form{
+  padding: 30px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius:10px;
+}
+.box{
+  position : relative;
+}
+.box input{
+  width:100%;
+  outline:none;
+  border:none;
+  border-bottom:1px solid #999;
+  transition:0.2s linear;    
+}
+.box input:focus{
+  border-bottom: 2px solid dodgerblue;
+}
+.box input:hover ~ label,
+.box input:valid ~ label,
+.box input:focus ~ label{
+  top:-20px;
+  font-size:15px;
+  color:dodgerblue;
+}
+.box label:hover{
+  top:-20px;
+  color:dodgerblue;
+  font-size:15px;
+}
+.box label{
+  position: absolute;
+  top:-8px;
+  color:#999;
+  font-size:18px;
+  font-weight: lighter;
+  transition:0.3s;
+}
+.box p{
+  font-size:13px;
+  margin-top:1%;
+}
+.heading{
+  padding:10px;
+  padding-left:0px;
+  font-size:25px;
+  margin-bottom: 10%;
+  font-weight: 500;
+}
+.smallParagraph{
+  margin-left:3%;
+  padding: 10px;
+  padding-left:0px;
+  font-size:13px;
+  
+}
+#show{
+  position:absolute;
+  top:-8px;
+  left:-15px;
+  border-radius:80%;
+  width:35px;
+  transition:0.5s;    
+}
+#show:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.sideImg{
+  display: flex !important;
+  align-content: center !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height:100%;
+}
+.sideImg img{
+  width:100%;
+}
+.final .link{
+  text-decoration: none;
+  padding:15px;
+  transition: 0.5s;
+  border-radius:10px;
+}
+.final .link:hover{
+  color:dodgerblue;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.final{
+  margin-top:5%;
+  margin-bottom:10%;
+  position:relative;
+}
+.final button{
+  padding: 10px;
+  background: dodgerblue; 
+  color:white;
+  position:absolute;
+  border-radius:5px;
+  right:10px;
+  top:-10px;
+  text-decoration: none;
+  width:200px;
+  text-align: center;
+}
+.final button:hover{
+  color:white;
+}
+.google p{
+  text-align: center;
+  font-size:22px;
+  margin-top:3%;
+}
+.google a{
+  padding:10px;
+  background: dodgerblue;
+  border:none;
+  width:200px;
+  border:none;
+}
+.google .pull-left{
+  background: #FF4004;
+}
+.google button:hover{
+  background: dodgerblue;
+}
+.google .pull-left:hover{
+  background: #FF4004;
+}
+
+/* All Forms CSS Ends Here */
+
+/* Home Route */
+.search{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background: url('/images/search.jpg');
+  background-size:cover;
+  background-repeat: none;
+  background-attachment: fixed;
+}
+.search_container{
+  height:300px;
+}
+.search_container input{
+  width:100%;
+  box-shadow: none;
+  padding:5px;
+  font-size:20px;
+  border-radius:5px;
+  outline:none !important;
+}
+.border{
+  padding:15px;
+  margin-top:5%;
+  height:100%;
+  margin-bottom:2%;
+}
+.imgbox img{
+  width:100%;
+  height:200px;
+}
+.course_details p{
+  font-size:15px;
+  margin-top:3%;
+} 
+.ImageBox{
+  transition:0.2s;
+  height:380px;
+  padding:20px;
+  width:100%;
+}
+.ImageBox:hover{
+  box-shadow: 0 4px 8px 0 #8b858533, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.searchButton{
+  outline:none !important;
+  border:none !important;
+}
+.pagination{
+  display: flex !important;
+  justify-content: center !important;
+  align-content: center !important;
+}
+.autocomplete {
+position: relative;
+display: inline-block;
+}
+.autocomplete-items {
+position: absolute;
+border: 1px solid #d4d4d4;
+border-bottom: none;
+border-top: none;
+z-index: 99;
+top: 100%;
+left: 0;
+right: 0;
+}
+.autocomplete-items div {
+padding: 10px;
+cursor: pointer;
+background-color: #fff; 
+border-bottom: 1px solid #d4d4d4; 
+}
+.autocomplete-items div:hover {
+background-color: #e9e9e9; 
+}
+.autocomplete-active {
+background-color: DodgerBlue !important; 
+color: #ffffff; 
+}
+.searchButton{
+background: dodgerblue !important;
+}
+
+
+/* Courses */
+.logo{
+  width:300px;
+  border-radius: 30px;
+  box-shadow: 0 10px 80px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  height:220px;
+}
+.head{
+  height:220px;
+  text-align: center;
+  padding: 20px;
+}
+.head p{
+  font-size: 1.3em;
+}
+.details .col-lg-4{
+  border : 1px solid black;
+}
+.courses{
+  margin-top: 5%;
+}
+.courses h3{
+  padding:15px;
+}
+.panel-title a{
+  text-decoration: none;
+  font-size: 1.1em;
+}
+.panel-title{
+  padding : 10px;
+}
+.course_contact{
+  text-align: center;
+  font-weight: bold;
+  width:99%;
+  margin-left: 1%;
+  background:url('/images/course_contact.jpg');
+  background-attachment: fixed;
+  border-radius: 30px;
+  background-size: cover;
+  background-position: center;
+  height:300px;
+  color:white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.panel-body{
+  padding:15px;
+  line-height: 30px;
+}
+#contact{
+  font-size: 40px;
+  color:white;
+}
+.contact_details{
+  font-size: 25px;
+}
+.panel-body_p{
+  font-size:1.3em;
+}
+#address span{
+  font-size: 1.1em;
+}
+.center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.address{
+  line-height: 30px;
+  height:300px;
+  font-size: 1.2em;
+}
+
+.share img {
+width: 45px;
+padding: 5px;
+border: 0;
+box-shadow: 0;
+display: inline;
+transition:1.5s
+}
+.share img:hover{
+  transform: rotate(360deg);
+  width:55px;
+}
+.share a:hover{
+  text-decoration: none;
+}
+
+#comment{
+  width:90%;
+  height:30px;
+  border:none;
+  border-bottom:2px solid #999;
+}
+.comment{
+  margin-top:3%;
+}
+.comment button,
+.comment input{
+  margin:10px;
+}
+#comment:focus{
+  outline:none;
+}
+#panel{
+   width:100%;
+   float: right;
+   height:500px;
+   overflow:auto;
+   overflow-x:hidden;
+}
+#map{
+  width:100%;
+  height: 500px;
+  float: left;
+}
+/* Course End */
+
+/* Profile */
+
+.profile{
+  height:100%;
+  padding: 10px;
+  border-radius:10px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+.profile form{
+  box-shadow: none;
+}
+.center{
+  text-align: center;
+}
+
+.profile input{
+  padding: 10px 0;
+  margin-bottom:30px;
+  width:100%;
+  box-sizing: border-box;
+  box-shadow: none;
+  border:none;
+  border-bottom: 1px solid #999;
+  outline:none;
+}
+.box1 div{
+  position: relative;
+  margin-left:30px;
+}
+.box1 div label{
+  position: absolute;
+  top:10px;
+  left:0;
+  transition: 0.3s;
+  color:#999;
+  pointer-events: none;
+}
+.profile input:focus ~ label,
+.profile input:hover ~ label,
+.profile input:valid ~ label{
+  top:-12px;
+  left:0;
+  font-size: 12px;
+  color:dodgerblue;
+}
+.profileImage{
+  padding: 5px;
+  height:200px;
+  border:1px solid #999;
+  margin-left:15px;
+  margin-right:15px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);   
+}
+.profileImage img{
+  height:100%;
+  width:100%;
+}
