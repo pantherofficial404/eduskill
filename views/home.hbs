@@ -9,7 +9,9 @@
         </form>
     </div>
     </div>
-        <div class="row" >
+        <div class="container">
+          <div class="row" >
+            {{#if course}}
             {{#each course}}
             <div class="col-xs-12 col-md-3 col-lg-3 border">
                 <div class="ImageBox">
@@ -24,6 +26,10 @@
                 </div>
             </div>
             {{/each}}
+            {{else}}
+            <h2 align="center" style="margin-top:5%;">Oops... We Could Not Found Anything..</h2>
+            {{/if}}
+        </div>
         </div>
         <div>
             <ul class="pagination pagination-lg">

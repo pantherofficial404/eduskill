@@ -4,43 +4,93 @@ var User = require('../models/user')
 var passport = require('passport')
 var nodemailer = require('nodemailer')
 var async = require('async')
-var crypto = require('crypto')
-var bcrypt = require('bcrypt')
 var Course = require('../models/courses')
-var multer = require('multer')
 var path = require('path')
 var fs = require('fs')
 var url = require('url')
-const storage = multer.diskStorage({
-  destination : './public/upload',
-  filename : function(req,file,cb){
-    cb(null,req.user.email+'-'+Date.now()+path.extname(file.originalname))
-  }
+const mongoose = require('mongoose');
+var multer = require('multer')
+const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
+const methodOverride = require('method-override');
+const crypto  = require('crypto');
+
+// Databse Setup
+
+const MONGO = "mongodb://root:abc123@ds259210.mlab.com:59210/panther404"
+// Databse Setup 
+const conn = mongoose.createConnection(MONGO);
+
+// GridFs
+let gfs;
+conn.once("open",()=>{
+    gfs = Grid(conn.db,mongoose.mongo);
+    gfs.collection('uploads');
 })
 
-const upload = multer({
-  storage : storage,
-  limits : {fileSize:1000000},
-  fileFilter : function(req,file,cb){
-    checkFileType(file,cb)
-  }
-}).single('image')
+// Create Storage Engine
+const storage = new GridFsStorage({
+    url: MONGO,
+    file: (req, file) => {
+      return new Promise((resolve, reject) => {
+        crypto.randomBytes(16, (err, buf) => {
+          if (err) {
+            return reject(err);
+          }
+          const filename = buf.toString('hex') + path.extname(file.originalname);
+          const fileInfo = {
+            filename: filename,
+            bucketName: 'uploads'
+          };
+          resolve(fileInfo);
+        });
+      });
+      
+    }
+  });
+  const upload = multer({
+      storage:storage,
+      limits : {fileSize : 100000},
+      fileFilter : function(req,file,cb){
+        checkFileType(file,cb)
+      }
+    }).single('file')
+    
+    function checkFileType(file,cb){
+      const filetypes = /jpeg|jpg|png|gif/;
+      const extname = filetypes.test(path.extname(file.originalname).toLocaleLowerCase())
+      const mimetype = filetypes.test(file.mimetype)
+    
+      if(mimetype && extname){
+        return cb(null,true)
+      }else{
+        cb('Error : Please Upload Images Only')
+      }
+    }
 
-function checkFileType(file,cb){
-  const filetypes = /jpeg|jpg|png|gif/;
-  const extname = filetypes.test(path.extname(file.originalname).toLocaleLowerCase())
-  const mimetype = filetypes.test(file.mimetype)
-
-  if(mimetype && extname){
-    return cb(null,true)
+mongoose.connect('mongodb://panther:Pappa@ds151431.mlab.com:51431/student_academy',(err)=>{
+  if(err){
+    console.log(`Unable to Connect With Database`)
   }else{
-    cb('Error : Please Upload Images Only')
+    console.log('Connected To The database')
+  } 
+})/* *********************************************************************** 
+                           Email Credentials
+*************************************************************************/
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'pantherofficial404@gmail.com',
+    pass: 'Panther@143'
   }
-}
-var googleMapsClient = require('@google/maps').createClient({
-  key: 'AIzaSyC_W2QaRiFEj4HU-F_uyAlN2oUXKcBoPZw'
 });
-/* GET home page. */
+/* ***********************************************************************
+*************************************************************************/
+
+
+/* ***********************************************************************
+                      Get Request On Main Page
+*************************************************************************/
 router.get('/',function(req, res, next) {
   if(req.isAuthenticated()){
   var i = 16
@@ -77,9 +127,14 @@ router.get('/',function(req, res, next) {
       res.render('index');
   }
 });
+/* ***********************************************************************
+                        Ending of Main Page
+*************************************************************************/
 
-// Sign In Routes
 
+/* ***********************************************************************
+                        Sign Up Routes (GET & POST)
+*************************************************************************/
 router.get('/signup',notLoggedIn,(req,res,next)=>{
   var message = req.flash('error')
   res.render('user/signup',{messages:message})
@@ -90,7 +145,13 @@ router.post('/signup',notLoggedIn,passport.authenticate('local-signup',{
   failureRedirect: '/signup',
   failureFlash: true,
 }))
+/* ***********************************************************************
+                      Ending Of Sign Up Routes
+*************************************************************************/
 
+/* ***********************************************************************  
+                      Sign in Routes (GET & POST)
+*************************************************************************/
 router.get('/signin',notLoggedIn,(req,res,next)=>{
   let message = req.flash('error')
   res.render('user/login',{messages:message})
@@ -100,14 +161,6 @@ router.post('/signin',notLoggedIn,passport.authenticate('local-signin',{
   failureRedirect: '/signin',
   failureFlash: true,
 }),function(req,res,next){
-  var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'pantherofficial404@gmail.com',
-    pass: 'Panther@143'
-  }
-});
-
 var mailOptions = {
   from: 'pantherofficial404@gmail.com',
   to: req.user.email,
@@ -126,7 +179,6 @@ transporter.sendMail(mailOptions, function(error, info){
 })
 
 // Forgot Route
-
 router.get('/forgot',notLoggedIn,(req,res,next)=>{
   var message = req.flash('error')
   res.render('user/forgot',{messages:message})
@@ -156,13 +208,6 @@ router.post('/forgot',notLoggedIn,(req,res,next)=>{
       });
     },
     function(token, user, done) {
-      var smtpTransport = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-          user: 'pantherofficial404@gmail.com',
-          pass: 'Panther@143'
-        }
-      });
       var mailOptions = {
         to: user.email,
         from: 'pantherofficial404@gmail.com',
@@ -172,7 +217,7 @@ router.post('/forgot',notLoggedIn,(req,res,next)=>{
           'http://' + req.headers.host + '/reset/' + token + '\n\n' +
           'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       };
-      smtpTransport.sendMail(mailOptions, function(err) {
+      transporter.sendMail(mailOptions, function(err) {
         done(err, 'done');
       });
     }
@@ -183,6 +228,7 @@ router.post('/forgot',notLoggedIn,(req,res,next)=>{
   });
 });
 
+// Reset Routes are
 router.get('/reset/:token',notLoggedIn,function(req, res) {
   User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
     if (!user) {
@@ -217,20 +263,13 @@ router.post('/reset/:token',notLoggedIn,function(req, res,next) {
       })
     },
     function(user, done) {
-      var smtpTransport = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-          user: 'pantherofficial404@gmail.com',
-          pass: 'Panther@143'
-        }
-      });
       var mailOptions = {
         to: user.email,
         from: 'pantherofficial404@gmail.com',
         subject: 'Node.js Password Reset',
         text: 'You Have Successfully Changed Your Password'
       };
-      smtpTransport.sendMail(mailOptions, function(err) {
+      transporter.sendMail(mailOptions, function(err) {
         done(err, 'done');
       });
     }
@@ -259,43 +298,30 @@ router.get('/profile',isLoggedIn,(req,res,next)=>{
   var message = req.flash('success')
   res.render('user/profile',{profile:req.user,message:message})
 })
+
 router.post('/profile',isLoggedIn,(req,res,next)=>{
   upload(req,res,(err)=>{
     if(err){
-      res.render('user/profile',{error:'Image should be less than 1MB',profile:req.user})
-    }
-    else{
-        User.findOne({_id :  req.user},function(err,user){
-          if(err){
-            res.render('user/profile',{error:"Something Went Wrong",profile:req.user})
-          }else{
-            if(user.comparePassword(req.body.currentPassword)){
-              user.firstname = req.body.firstname
-              user.lastname = req.body.lasttname
-              user.email = req.body.email
-              user.password = user.encryptPassoword(req.body.currentPassword)
-              if(req.file!=undefined){
-                  var image = './'+user.profile
-                  image = image.replace('upload','public\\upload')
-                  fs.unlink(image,function(err){
-                  if(err) return console.log(err);
-             }); 
-                var path = req.file.path
-                path = path.replace('public\\','/')
-                user.profile = path
-              }
-              user.save((err)=>{
-                if(err){
-                  res.render('user/profile',{error:"Something Went Wrong.. Please Try Again",profile:req.user})
-                }
-              })
-              req.flash('success','Profile Updated Successfully')
-              res.redirect('/profile')
+      console.log(err);
+      res.redirect('back');
+    }else{
+      User.findOne({_id : req.user},function(err,user){
+        if(err){
+          req.flash('success','Something Went Wrong.. Please Try Again Later');
+        }else{
+          user.firstname = req.body.firstname
+          user.lastname = req.body.lastname
+          user.profile = `/asset/image/${req.file.filename}`
+          user.save(err=>{
+            if(err){
+              res.redirect('back')
             }else{
-            res.render('user/profile',{error:'Please Enter Your Current Password',profile:req.user})
+              req.flash('success','Profile Updated Successfully');
+              res.redirect('/profile');
             }
-          }
-        })
+          })
+        }
+      })
     }
   })
 })
@@ -395,6 +421,8 @@ router.post('/search',isLoggedIn,(req,res,next)=>{
     }
   })
 })
+
+
 module.exports = router;
 
 function isLoggedIn(req,res,next){

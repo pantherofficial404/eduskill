@@ -82,6 +82,7 @@ passport.use(new GoogleStrategy({
         if(user){
           done(null,user)
         }else{
+          console.log(profile)
           var user = new User()
           user.username = profile.displayName
           user.googleId = profile.id

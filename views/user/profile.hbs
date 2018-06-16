@@ -15,16 +15,12 @@
                             <label for="firstname">Firstname</label>
                         </div>
                         <div>
-                            <input type="text" name="lasttname" required value="{{profile.lastname}}">
+                            <input type="text" name="lastname" required value="{{profile.lastname}}">
                             <label for="lastname">Lastname</label>
                         </div>
                         <div>
-                            <input type="text" name="email" value="{{profile.email}}" required >
-                            <label for="email">Email</label>
-                        </div>
-                        <div>
-                            <input type="password" name="currentPassword" required>
-                            <label for="currentPassword">Password</label>
+                            <input type="text" name="email" value="{{#if profile.email }} {{profile.email}} {{else}} {{profile.username}} {{/if}}" >
+                            <label for="email">Username / Email </label>
                         </div>
                         <div>
                             <button class="btn btn-primary pull-right">Update Info</button>
@@ -35,7 +31,7 @@
                         <div class="profileImage">
                             <img src="{{profile.profile}}" alt="" class="responsive-img">
                         </div>
-                        <input type="file" name="image">
+                        <input type="file" name="file" id="file" class="custom-file-input">
                     </div>
                 </div>
                 </form>
