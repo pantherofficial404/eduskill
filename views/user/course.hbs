@@ -167,10 +167,11 @@ function initMap() {
 }
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_W2QaRiFEj4HU-F_uyAlN2oUXKcBoPZw&callback=initMap"
-    async defer></script>{{#if message}}
-<script>
-  alert('{{message}}');
-</script>
-{{/if}}
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_W2QaRiFEj4HU-F_uyAlN2oUXKcBoPZw&callback=initMap"
+  type="text/javascript"></script>
+  {{#if message}}
+    <script>
+    alert('{{message}}');
+    </script>
+  {{/if}}
 
